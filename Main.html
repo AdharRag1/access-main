@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Exchange Library</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;text=ads_click,text_rotation_none,text_fields,format_size,blind,restart_alt,close,link,local_parking,contrast,spellcheck,local_library,format_bold,format_line_spacing" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=straighten" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;text=ads_click,text_rotation_none,text_fields,format_size,blind,restart_alt,close,link,local_parking,contrast,spellcheck,local_library,format_bold,format_line_spacing" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=exposure" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;text=ads_click,text_rotation_none,text_fields,format_size,blind,restart_alt,close,link,local_parking,contrast,spellcheck,local_library,format_bold,format_line_spacing" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;text=ads_click,text_rotation_none,text_fields,format_size,blind,restart_alt,close,link,local_parking,contrast,spellcheck,local_library,format_bold,format_line_spacing" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="stylebook.css">
+    <script src="script.js"></script>
+</head>
+<body id="content">
+<div class="asw-menu" style="display: none;" id="aswMenu">
+    <div class="asw-menu-header">
+        <div class="asw-translate">
+            Accessibility Menu
+        </div>
+        
+        <div>
+            <select  id="language" >
+                
+                <option id="language" value="en">English</option>
+                <option  id="language" value="ar">العربية</option>
+                <option  id="language" value="fr">Francais</option>
+            </select>
+            <div role="button" class="asw-menu-reset"  title="Reset settings" onclick="reset()">
+                <span class="material-icons" >
+                    restart_alt
+                </span>
+            </div>
+            <div role="button" class="asw-menu-close" title="Close" onclick="toggleMenu()">
+                <span class="material-icons" >
+                    close
+                </span>
+            </div>
+           
+        </div>
+       
+    </div>
+    <div class="asw-menu-content" >
+        <div class="asw-card">
+            
+            <!-- Profiles Menu -->
+            <div class="dropdown">
+                <button class="dropdown-toggle" id="profile-toggle"><span class="material-symbols-outlined">settings_accessibility</span>
+                   Accessibility Profiles</button>
+                <div class="dropdown-content" id="profiles-menu">
+                    <button class="profile-option" data-profile="motor-impaired">
+                        <span class="material-symbols-outlined">follow_the_signs</span>
+                             <div>  Motor Impaired</div></button>
+                    <button class="profile-option" data-profile="blind">
+                        <span class="material-symbols-outlined"> blind</span>
+                        <div>   Blind</div></button>
+                    <button class="profile-option" data-profile="color-blind">
+                        <span class="material-symbols-outlined">visibility_off</span>
+                        <div>   Color Blind</div></button>
+                    <button class="profile-option" data-profile="dyslexia">
+                        <span class="material-symbols-outlined">highlight</span>Dyslexia</button>
+                    <button class="profile-option" data-profile="adhd">
+                        <span class="material-symbols-outlined">mindfulness</span>
+                        ADHD</button>
+                </div>
+            </div>
+            <hr class="solid">
+            <div id="asw-items" class="asw-items content">
+                
+                
+                    
+                    <button class="asw-btn"  onclick="adjustFontSize(0.1)" >
+                        <span class="material-icons">format_size</span>
+                        <span class="asw-translate">Increase Font Size </span>
+                     </button>
+                    <button class="asw-btn" type="button"onclick="adjustFontSize(-0.1)" id="fontsize">
+                        <span class="material-icons">text_fields</span>
+                        <span>Decrease Font Size</span>
+                    </button>
+                        
+              
+      
+                <button class="asw-btn" type="button" onclick=" adjustLineHeight(1)">
+                    <span class="material-icons">format_line_spacing</span>
+                    <span class="asw-translate">Line Spacing</span>
+                </button>
+                <button class="asw-btn" type="button" onclick="adjustLetterSpacing(0.1)">
+                    <span class="material-icons">text_rotation_none</span>
+                    <span class="asw-translate">Letter Spacing</span>
+                </button>
+                <button class="asw-btn" type="button" onclick="enableDyslexicFont()">
+                    <span class="material-icons">spellcheck</span>
+                    <span class="asw-translate">Dyslexic Font</span>
+                </button>
+                <button class="asw-btn" type="button" onclick="enableHighlightHeadings()">
+                    <span class="material-icons">local_parking</span>
+                    <span class="asw-translate">Highlight Headings</span>
+                </button>
+                <button class="asw-btn" type="button" onclick="enableHighlightLinks()">
+                    <span class="material-icons">link</span>
+                    <span class="asw-translate">Highlight Links</span>
+                </button>
+                <button class="asw-btn" type="button" onclick="adjustFontWeight(400)">
+                    <span class="material-icons">format_bold</span>
+                    <span class="asw-translate">Font Weight</span>
+                </button>
+                <button class="asw-btn" type="button"onclick="enableBigCursor()">
+                    <span class="material-icons">ads_click</span>
+                    <span class="asw-translate">Bigger Cursor</span>
+                </button>
+                
+                <button class="asw-btn" type="button" onclick="alignText('left')"><span class="material-icons">
+                    arrow_back_ios
+                    </span>Align Left</button>
+                <button class="asw-btn" type="button" onclick="alignText('center')"><span class="material-icons">
+                    keyboard_control_key
+                    </span>Align Center</button>
+                <button class="asw-btn" type="button" onclick="alignText('right')"><span class="material-icons">
+                    arrow_forward_ios
+                    </span>Align Right</button> 
+                
+                
+            
+                <button class="asw-btn" type="button"onclick="adjustContrast()">
+                    <span class="material-icons">contrast</span>
+                    <span class="asw-translate">Toggle Contrast</span>
+                </button>
+                <button class="asw-btn" type="button" onclick="toggleScreenReader()">
+                    <span class="material-icons">hearing</span>
+                    <span class="asw-translate">Screen Reader</span>
+                </button>
+                <div class="scaling">
+                    <button class="asw-btn" onclick="scaleContent(-1)">-</button>
+                    <button class="asw-btn" onclick="scaleContent(1)">+</button>
+                    <span class="asw-translate">Scaling</span>
+                </div>
+                
+                <button class="asw-btn" type="button" onclick="toggleLowSaturation()">
+                    <span class="material-icons">contrast</span>
+                    <span class="asw-translate">Toggle Low Saturation</span>
+                </button>
+                <button class="asw-btn" type="button"onclick="toggleHighSaturation()">
+                    <span class="material-icons">light_mode</span>       
+                    <span class="asw-translate">Toggle High Saturation</span>
+                </button>
+                <button class="asw-btn" type="button"onclick="toggleMonochrome()">
+                    <span class="material-icons">dark_mode</span>
+                    <span class="asw-translate">Toggle Mono  chrome</span>
+                </button>
+                <button class="asw-btn" type="button"onclick="toggleReadingRuler()">
+                    <span class="material-icons">straighten</span>   
+                   <span class="asw-translate">Reading Ruler</span>
+                </button>
+                <button class="asw-btn" type="button"onclick="toggleMute()">
+                    <span class="material-icons">volume_off</span> 
+                   <span class="asw-translate">Toggle Mute</span>
+                </button>
+                <button class="asw-btn" type="button"onclick="toggleImages()">
+                    <span class="material-icons">image</span> 
+                   <span class="asw-translate">Toggle Images</span>
+                </button>
+            </div> 
+            <hr class="solid">
+            <div class="colors">
+                <h4 class="colorsTitle"><span class="material-icons">highlight</span>Change Text Color</h4>
+                <div class="color-picker-container">
+                <div class="color-option blue" onclick="changeTextColor('#007bff')"></div>
+                <div class="color-option purple" onclick="changeTextColor('#6f42c1')"></div>
+                <div class="color-option red" onclick="changeTextColor('#dc3545')"></div>
+                <div class="color-option orange" onclick="changeTextColor('#fd7e14')"></div>
+                <div class="color-option teal" onclick="changeTextColor('#20c997')"></div>
+                <div class="color-option green" onclick="changeTextColor('#28a745')"></div>
+                <div class="color-option black" onclick="changeTextColor('#343a40')"></div>
+                <div class="color-option white" onclick="changeTextColor('#ffffff')"></div>
+                </div>
+                <h4 class="colorsTitle"><span class="material-icons">highlight</span>Change Title Color</h4>
+                <div class="color-picker-container">
+            
+                <div class="color-option blue" onclick="changeTitleColor('#007bff')"></div>
+                <div class="color-option purple" onclick="changeTitleColor('#6f42c1')"></div>
+                <div class="color-option red" onclick="changeTitleColor('#dc3545')"></div>
+                <div class="color-option orange" onclick="changeTitleColor('#fd7e14')"></div>
+                <div class="color-option teal" onclick="changeTitleColor('#20c997')"></div>
+                <div class="color-option green" onclick="changeTitleColor('#28a745')"></div>
+                <div class="color-option black" onclick="changeTitleColor('#343a40')"></div>
+                <div class="color-option white" onclick="changeTitleColor('#ffffff')"></div>
+                </div>
+                <h4 class="colorsTitle"><span class="material-icons">highlight</span>Change Background Color</h4>
+                <div class="color-picker-container">
+                
+                <div class="color-option blue" onclick="changeBackgroundColor('#007bff')"></div>
+                <div class="color-option purple" onclick="changeBackgroundColor('#6f42c1')"></div>
+                <div class="color-option red" onclick="changeBackgroundColor('#dc3545')"></div>
+                <div class="color-option orange" onclick="changeBackgroundColor('#fd7e14')"></div>
+                <div class="color-option teal" onclick="changeBackgroundColor('#20c997')"></div>
+                <div class="color-option green" onclick="changeBackgroundColor('#28a745')"></div>
+                <div class="color-option black" onclick="changeBackgroundColor('#343a40')"></div>
+                <div class="color-option white" onclick="changeBackgroundColor('#ffffff')"></div>
+                </div><hr class="solid">
+                
+   <!-- Move Widget Dropdown -->
+<div id="move-widget-menu" class="move-widget-dropdown">
+    <div id="move-widget-btn">Move Widget <span class="material-icons">arrow_drop_down</span></div>
+    <div id="move-widget-list" class="move-widget-list">
+      <div class="move-widget-option" data-position="top-left" onclick="moveWidget('top-left')">Top Left</div>
+      <div class="move-widget-option" data-position="top-right" onclick="moveWidget('top-right')">Top Right</div>
+      <div class="move-widget-option" data-position="bottom-left" onclick="moveWidget('bottom-left')">Bottom Left</div>
+      <div class="move-widget-option" data-position="bottom-right"onclick="moveWidget('bottom-right')">Bottom Right</div>
+    </div>
+  </div>
+  
+                
+                       
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+<header>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <div class="nav-right">
+                <li><a href="#books">Books</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </div>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to the Book Exchange Library</h1>
+            <p>Exchange your favorite scientific books with other readers!</p>
+        </div>
+    </section>
+    
+    <!-- Books Section -->
+    <section id="books" class="books">
+        <h2>Available Scientific Books</h2>
+        <div class="book-list">
+            <div class="book">
+                <img src="https://m.media-amazon.com/images/I/81wgcld4wxL._AC_UY327_FMwebp_QL65_.jpg" alt="Jane Eyre">
+                <h3>Title: Jane Eyre</h3>
+                <p>Author: Charlotte Brontë</p>
+                <p>Pages: 500</p>
+                <p>Description: A story about the life and hardships of the orphan Jane Eyre.</p>
+                <button>Exchange</button>
+                <button>Details</button>
+            </div>
+            <div class="book">
+                <img src="https://m.media-amazon.com/images/I/81CCtn4O7-L.SS700.jpg" alt="The Selfish Gene">
+                <h3>Title: The Selfish Gene</h3>
+                <p>Author: Richard Dawkins</p>
+                <p>Pages: 384</p>
+                <p>Description: A look at evolution and biology through the lens of gene-centered evolution.</p>
+                <button>Exchange</button>
+                <button>Details</button>
+            </div>
+            <div class="book">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Origin_of_Species_title_page.jpg/800px-Origin_of_Species_title_page.jpg" alt="The Origin of Species">
+                <h3>Title: On the Origin of Species</h3>
+                <p>Author: Charles Darwin</p>
+                <p>Pages: 502</p>
+                <p>Description: Darwin's groundbreaking work on the theory of natural selection.</p>
+                <button>Exchange</button>
+                <button>Details</button>
+            </div>
+            <div class="book">
+                <img src="https://m.media-amazon.com/images/I/81YPgi4vpDL._AC_UY327_FMwebp_QL65_.jpg" alt="Cosmos">
+                <h3>Title: Cosmos</h3>
+                <p>Author: Carl Sagan</p>
+                <p>Pages: 384</p>
+                <p>Description: A sweeping overview of the universe and humanity’s place within it.</p>
+                <button>Exchange</button>
+                <button>Details</button>
+            </div>
+            <div class="book">
+                <img src="https://m.media-amazon.com/images/I/514qXalERqL._SL1000_.jpg" alt="The Gene: An Intimate History">
+                <h3>Title: The Gene: An Intimate History</h3>
+                <p>Author: Siddhartha Mukherjee</p>
+                <p>Pages: 608</p>
+                <p>Description: A story about the history of genetics and the future of biology.</p>
+                <button>Exchange</button>
+                <button>Details</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Book Exchange Library. All rights reserved.</p>
+    <p>Address: 123 Library Lane, Booktown, BK 12345</p>
+    <p>Email: info@bookexchange.com | Phone: (123) 456-7890</p>
+</footer>
+
+
+<div class="asw-widget">
+    <a class="asw-menu-btn" title="Open Accessibility Menu" role="button" aria-expanded="false" onclick="toggleMenu()"> 
+        <span class="material-icons md-36 white">
+                blind
+        </span>
+    </a>
+</div>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;text=ads_click,text_rotation_none,text_fields,format_size,blind,restart_alt,close,link,local_parking,contrast,spellcheck,local_library,format_bold,format_line_spacing" rel="stylesheet">
+</body>
+
+</html>
+

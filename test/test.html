@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Improved Accessibility Widget</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="test.css">
+</head>
+<body>
+  <div class="asw-menu">
+    <div class="asw-menu-header">
+      <h2>Accessibility Settings</h2>
+      <button class="toggle-profiles-btn">Profiles</button>
+    </div>
+    <div class="asw-profiles">
+      <h3 class="profiles-title">Accessibility Profiles</h3>
+      <div class="profiles-grid">
+        <button class="profile-btn" data-profile="blind" data-tooltip="Optimized for screen readers.">
+          <span class="material-icons">visibility_off</span>
+          Blind
+        </button>
+        <button class="profile-btn" data-profile="color-blind" data-tooltip="Color-blind-friendly adjustments.">
+          <span class="material-icons">palette</span>
+          Color Blind
+        </button>
+        <button class="profile-btn" data-profile="adhd" data-tooltip="Focus mode and distraction-free settings.">
+          <span class="material-icons">bolt</span>
+          ADHD
+        </button>
+        <button class="profile-btn" data-profile="dyslexia" data-tooltip="Dyslexia-friendly font and settings.">
+          <span class="material-icons">menu_book</span>
+          Dyslexia
+        </button>
+      </div>
+    </div>
+    <div class="asw-menu-content">
+      <!-- Add other accessibility tools or content here -->
+    </div>
+  </div>
+  <div class="asw-menu-btn">
+    <span class="material-icons md-36 white">settings</span>
+  </div>
+  <script src="test.js"></script>
+</body>
+</html>
+
+
+<div class="dropdown">
+            
+  <button id="move-widget-btn">Move Widget <span class="material-icons">arrow_drop_down</span></button>
+  <div id="move-widget-list" class="move-widget-list">
+    <div class="move-widget-option" data-position="top-left" onclick="moveWidget('top-left')">Top Left</div>
+    <div class="move-widget-option" data-position="top-right" onclick="moveWidget('top-right')">Top Right</div>
+    <div class="move-widget-option" data-position="bottom-left" onclick="moveWidget('bottom-left')">Bottom Left</div>
+    <div class="move-widget-option" data-position="bottom-right"onclick="moveWidget('bottom-right')">Bottom Right</div>
+  </div>
+</div>
+
+
+</div>

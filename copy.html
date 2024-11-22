@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Menu</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;text=ads_click,text_rotation_none,text_fields,format_size,blind,restart_alt,close,link,local_parking,contrast,spellcheck,local_library,format_bold,format_line_spacing" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
+
+        body {
+            
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+ .content-container {
+            filter: none; 
+            transition: filter 0.3s ease;
+        }
+        .accessibility-menu {
+            position: fixed;
+            top: 30px;
+            right: 20px;
+            
+            
+            background: #f9f9f9;
+            width: 400px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 20px #00000080;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #275498;
+            color: white;
+        }
+
+        .menu-header-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .menu-close, .menu-reset {
+            cursor: pointer;
+        }
+
+        .menu-close:hover, .menu-reset:hover {
+            opacity: 0.8;
+        }
+
+        .menu-content {
+            padding: 15px;
+            overflow-y: auto;
+            max-height: calc(80vh - 120px);
+           
+        }
+
+        .menu-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #dedede;
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-align: center;
+        }
+
+        .menu-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .menu-button span {
+            margin-left: 8px;
+            
+        }
+
+        .menu-toggle {
+            position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height:100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .widget-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0%;
+        }
+
+        .large-font {
+            font-size: 1.5em;
+        }
+
+        .dyslexia-font {
+            font-family: 'Comic Sans MS', sans-serif;
+        }
+
+        .highlight-links a {
+            background-color: yellow;
+            color: black;
+        }
+
+        .highlight-headings h1, .highlight-headings h2, .highlight-headings h3,
+        .highlight-headings h4, .highlight-headings h5, .highlight-headings h6 {
+            background-color: lightblue;
+            color: black;
+        }
+
+        .large-cursor {
+            cursor: url('cr.png') 16 16, auto;
+        }
+
+        .high-contrast {
+            background-color: black !important;
+            color: yellow !important;
+        }
+
+        .extra-spacing {
+            letter-spacing: 2px;
+        }
+
+        .wide-lines {
+            line-height: 2;
+        }
+
+        .bold-text {
+            font-weight: bold;
+        }
+        .mask2 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    display: none;
+    z-index: 10;
+}
+
+        body.dimmed::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+    z-index: 5;
+    pointer-events: none;
+}
+     
+        .color-picker-container {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            
+            border-radius: 4px;
+            
+            
+            text-align: center;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #fff;
+        }
+
+        .color-option:hover {
+            border: 2px solid #000;
+        }
+
+        .color-option.blue { background-color: #007bff; }
+        .color-option.purple { background-color: #6f42c1; }
+        .color-option.red { background-color: #dc3545; }
+        .color-option.orange { background-color: #fd7e14; }
+        .color-option.teal { background-color: #20c997; }
+        .color-option.green { background-color: #28a745; }
+        .color-option.black { background-color: #343a40; }
+        .color-option.white { background-color: #ffffff; }
+.colorsTitle{
+    text-align: center;
+    margin-bottom: -10px;
+}
+.high-saturation {
+    filter: saturate(3); 
+}
+.low-saturation {
+    filter: saturate(0.3); 
+}
+
+.reading-ruler {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 1); 
+    height: 10px; 
+    width: 120px; 
+    z-index: 1000;
+    pointer-events: none; 
+    transition: top 0.1s ease, left 0.1s ease; 
+    transform: translateX(-50%); 
+}
+.editor-toolbar {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.editable-content {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 100px;
+}
+.text-content {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+           
+        }
+        .control-panel {
+            margin-bottom: 10px;
+        }
+        .control-panel button {
+            padding: 5px 10px;
+            font-size: 16px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body contenteditable="true" id="textArea" class="editable-content">
+    <div class="text-content" id="text-content">
+        <div class="content-container" id="contentContainer">
+            <h1>Sample Page</h1>
+            <p>This is the content of the sample page.</p>
+            <a href="https://www.google.com">This is a link</a>
+            <br>
+            <img src="test.jpeg" alt="" style="margin: 50px; width: 1500px; height: 750px;"><br>
+            <h2>Music</h2>
+            <audio controls><source src="test.mp3" type="audio/mpeg"></audio>
+        </div>
+
+        <div class="accessibility-menu" id="accessibilityMenu" style="display: none;">
+            <div class="menu-header">
+                <div class="menu-header-title">Accessibility Menu</div>
+                <div>
+                    <span class="material-icons menu-reset" onclick="resetSettings()">restart_alt</span>
+                    <span class="material-icons menu-close" onclick="toggleMenu()">close</span>
+                </div>
+            </div>
+            <div class="menu-content">
+                <div class="menu-button" onclick="adjustFontSize(1)">
+                    <span class="material-icons">format_size</span>
+                    <span>Increase Font Size</span>
+                </div>
+                <div class="menu-button" onclick="adjustFontSize(-1)">
+                    <span class="material-icons">text_fields</span>
+                    <span>Decrease Font Size</span>
+                </div>
+                <div class="menu-button" onclick="toggleLineHeight()">
+                    <span class="material-icons">format_line_spacing</span>
+                    <span>Toggle Line Height</span>
+                </div>
+                <div class="menu-button" onclick="toggleLetterSpacing()">
+                    <span class="material-icons">text_rotation_none</span>
+                    <span>Toggle Letter Spacing</span>
+                </div>
+                <div class="menu-button" onclick="toggleDyslexiaFont()">
+                    <span class="material-icons">spellcheck</span>
+                    <span>Toggle Dyslexia Font</span>
+                </div>
+                <div class="menu-button" onclick="toggleHighlightHeadings()">
+                    <span class="material-icons">local_parking</span>
+                    <span>Highlight Headings</span>
+                </div>
+                <div class="menu-button" onclick="toggleHighlightLinks()">
+                    <span class="material-icons">link</span>
+                    <span>Highlight Links</span>
+                </div>
+                <div class="menu-button" onclick="toggleBoldText()">
+                    <span class="material-icons">format_bold</span>
+                    <span>Toggle Bold Text</span>
+                </div>
+                <div class="menu-button" onclick="enableBigCursor()">
+                    <span class="material-icons">ads_click</span>
+                    <span>Toggle Big Cursor</span>
+                </div>
+                <div class="menu-button" onclick="toggleContrast()">
+                    <span class="material-icons">contrast</span>
+                    <span>Toggle Contrast</span>
+                </div>
+                <!--++++++++++shortcut+++++++++++++++-->
+                <div class="menu-button" onclick="toggleScreenReader()" aria-label="Toggle Screen Reader" role="button">
+                    <span class="material-icons">hearing</span>
+                    <span>Toggle Screen Reader</span>
+                </div>
+                <div class="menu-button">
+                    <div class="editor-toolbar">
+                        <button onclick="alignText('left')">Align Left</button>
+                        <button onclick="alignText('center')">Align Center</button>
+                        <button onclick="alignText('right')">Align Right</button>
+                    </div>
+                </div>
+                <div class="menu-button">
+                    <div class="control-panel">
+                        <span class="material-symbols-outlined">aspect_ratio</span>
+                        <span>Content Scaling</span>
+                        <button onclick="scaleContent(-1)">-</button>
+                        <button onclick="scaleContent(1)">+</button>
+                    </div>
+                </div>
+                <h4 class="colorsTitle"><span class="material-icons">highlight</span>Change Text Color</h4>
+                <div class="color-picker-container">
+                    <span class="material-symbols-outlined">invert_colors</span>
+                    <div class="color-option blue" onclick="changeTextColor('#007bff')"></div>
+                    <div class="color-option purple" onclick="changeTextColor('#6f42c1')"></div>
+                    <div class="color-option red" onclick="changeTextColor('#dc3545')"></div>
+                    <div class="color-option orange" onclick="changeTextColor('#fd7e14')"></div>
+                    <div class="color-option teal" onclick="changeTextColor('#20c997')"></div>
+                    <div class="color-option green" onclick="changeTextColor('#28a745')"></div>
+                    <div class="color-option black" onclick="changeTextColor('#343a40')"></div>
+                    <div class="color-option white" onclick="changeTextColor('#ffffff')"></div>
+                </div>
+                <h4 class="colorsTitle"><span class="material-icons">highlight</span>Change Title Color</h4>
+                <div class="color-picker-container">
+                    <span class="material-symbols-outlined">invert_colors</span>
+                    <div class="color-option blue" onclick="changeTitleColor('#007bff')"></div>
+                    <div class="color-option purple" onclick="changeTitleColor('#6f42c1')"></div>
+                    <div class="color-option red" onclick="changeTitleColor('#dc3545')"></div>
+                    <div class="color-option orange" onclick="changeTitleColor('#fd7e14')"></div>
+                    <div class="color-option teal" onclick="changeTitleColor('#20c997')"></div>
+                    <div class="color-option green" onclick="changeTitleColor('#28a745')"></div>
+                    <div class="color-option black" onclick="changeTitleColor('#343a40')"></div>
+                    <div class="color-option white" onclick="changeTitleColor('#ffffff')"></div>
+                </div>
+                <h4 class="colorsTitle"><span class="material-icons">highlight</span>Change Background Color</h4>
+                <div class="color-picker-container">
+                    <span class="material-symbols-outlined">invert_colors</span>
+                    <div class="color-option blue" onclick="changeBackgroundColor('#007bff')"></div>
+                    <div class="color-option purple" onclick="changeBackgroundColor('#6f42c1')"></div>
+                    <div class="color-option red" onclick="changeBackgroundColor('#dc3545')"></div>
+                    <div class="color-option orange" onclick="changeBackgroundColor('#fd7e14')"></div>
+                    <div class="color-option teal" onclick="changeBackgroundColor('#20c997')"></div>
+                    <div class="color-option green" onclick="changeBackgroundColor('#28a745')"></div>
+                    <div class="color-option black" onclick="changeBackgroundColor('#343a40')"></div>
+                    <div class="color-option white" onclick="changeBackgroundColor('#ffffff')"></div>
+                </div>
+                <div class="menu-button" onclick="toggleMonochrome()">
+                    <span class="material-icons">contrast</span>
+                    <span>Toggle Monochrome</span>
+                </div>
+                <div class="menu-button" onclick="toggleHighSaturation()">
+                    <span class="material-icons">hdr_strong</span>
+                    <span>Toggle High Saturation</span>
+                </div>
+                <div class="menu-button" onclick="toggleLowSaturation()">
+                    <span class="material-symbols-outlined">format_color_reset</span>
+                    <span>Toggle Low Saturation</span>
+                </div>
+                <div class="menu-button" onclick="toggleImages()">
+                    <span class="material-icons">image</span>
+                    <span>Toggle Images</span>
+                </div>
+                <div class="menu-button" onclick="toggleMute()">
+                    <span class="material-symbols-outlined">volume_off</span>
+                    <span>Toggle Mute</span>
+                </div>
+                <div class="menu-button" onclick="toggleReadingRuler()">
+                    <span class="material-symbols-outlined">straighten</span>
+                    <span>Toggle Reading Ruler</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <img src="icon.png" alt="Accessibility Icon" class="widget-icon">
+        </div>
+    </div>
+</body>
+
+<script>
+    let isReadingMaskActive = false;
+    let areImagesHidden = false;
+    let isMuted = false;
+    let isReading = false;
+    
+    function scaleContent(step) {
+     const content = document.getElementById('text-content');
+     let currentSize = parseFloat(window.getComputedStyle(content, null).getPropertyValue('font-size'));
+     content.style.fontSize = (currentSize + step) + 'px';
+ }
+
+// Create the reading ruler element
+function alignText(alignment) {
+document.getElementById("textArea").style.textAlign = alignment;
+}
+let readingRuler;
+
+
+function createReadingRuler() {
+ readingRuler = document.createElement('div');
+ readingRuler.className = 'reading-ruler';
+ document.body.appendChild(readingRuler);
+}
+
+function removeReadingRuler() {
+ if (readingRuler) {
+     document.body.removeChild(readingRuler);
+     readingRuler = null;
+ }
+}
+
+function updateRulerPosition(event) {
+ if (readingRuler) {
+     const x = event.clientX;
+     const y = event.clientY;
+     readingRuler.style.left = `${x}px`;
+     readingRuler.style.top = `${y + window.scrollY}px`; 
+ }
+}
+
+function toggleReadingRuler() {
+ if (readingRuler) {
+     removeReadingRuler();
+     document.removeEventListener('mousemove', updateRulerPosition);
+ } else {
+     createReadingRuler();
+     document.addEventListener('mousemove', updateRulerPosition);
+ }
+}
+
+function toggleMute() {
+ const mediaElements = document.querySelectorAll('audio, video');
+ if (isMuted) {
+     mediaElements.forEach(media => media.muted = false);
+ } else {
+     mediaElements.forEach(media => media.muted = true);
+ }
+ isMuted = !isMuted;
+}
+
+function toggleImages() {
+ const images = document.querySelectorAll('img');
+ if (areImagesHidden) {
+     images.forEach(img => img.style.display = 'block');
+ } else {
+     images.forEach(img => img.style.display = 'none');
+ }
+ areImagesHidden = !areImagesHidden;
+}
+function toggleReadingMask() {
+ const mask = document.getElementById('readingMask');
+ if (isReadingMaskActive) {
+     mask.classList.remove('active');
+ } else {
+     mask.classList.add('active');
+ }
+ isReadingMaskActive = !isReadingMaskActive;
+}
+
+// Optionally, you can adjust the focus area size and position dynamically
+/**function setFocusAreaDimensions(width, height, left, top) {
+ const focusArea = document.querySelector('.mask-content');
+ focusArea.style.width = `${width}px`;
+ focusArea.style.height = `${height}px`;
+ focusArea.style.left = `${left}px`;
+ focusArea.style.top = `${top}px`;
+}**/
+
+     function toggleLowSaturation() {
+ const container = document.getElementById("contentContainer");
+ container.classList.toggle('low-saturation');
+}
+     function toggleHighSaturation() {
+ const container = document.getElementById("contentContainer");
+ container.classList.toggle('high-saturation');
+}
+     function toggleMonochrome() {
+         const container = document.getElementById("contentContainer");
+         const isMonochrome = container.style.filter === 'grayscale(100%)';
+         container.style.filter = isMonochrome ? 'none' : 'grayscale(100%)';
+     }
+
+       function changeBackgroundColor(color) {
+         document.body.style.backgroundColor = color;
+     }
+     function toggleTextColorPicker() {
+ const colorPicker = document.getElementById('textColorPicker');
+ colorPicker.style.display = colorPicker.style.display === 'none' ? 'block' : 'none';
+}
+function changeTitleColor(color) {
+         const title = document.querySelector('h1');
+         title.style.color = color;
+     }
+function changeTextColor(color) {
+         document.body.style.color = color;
+     }
+     let isScreenReaderActive = false;
+     let isADHDFocusZoneActive = false;
+    /** function toggleADHDFocusZone() {
+         const overlay = document.getElementById('adhdOverlay');
+         const contentToFocus = document.getElementById("adhd-focus-zone"); // Change this selector as needed
+         if (isADHDFocusZoneActive) {
+             overlay.style.display = 'none';
+             contentToFocus.classList.remove('adhd-focus-zone');
+         } else {
+             overlay.style.display = 'block';
+             contentToFocus.classList.add('adhd-focus-zone');
+         }
+         isADHDFocusZoneActive = !isADHDFocusZoneActive;
+     }**/
+
+function toggleScreenReader() {
+ if (isScreenReaderActive) {
+     stopScreenReader();
+     alert("Screen Reader Deactivated");
+ } else {
+     startScreenReader();
+     alert("Screen Reader Activated");
+ }
+ isScreenReaderActive = !isScreenReaderActive;
+}
+
+function startScreenReader() {
+ const elementsToRead = document.querySelectorAll('h1, h2, h3, p, a');
+ elementsToRead.forEach(element => {
+     const utterance = new SpeechSynthesisUtterance(element.innerText);
+     utterance.rate = 1.5; 
+     utterance.pitch = 1;
+     speechSynthesis.speak(utterance);
+ });
+}
+
+function stopScreenReader() {
+ speechSynthesis.cancel();
+}
+
+     function toggleMenu() {
+         const menu = document.getElementById("accessibilityMenu");
+         menu.style.display = menu.style.display === "none" ? "block" : "none";
+     }
+
+     function adjustFontSize(increment) {
+         const body = document.body;
+     const currentFontSize = window.getComputedStyle(body).fontSize;
+     let newSize = parseFloat(currentFontSize) + increment;
+
+
+     const minFontSize = 10; 
+     const maxFontSize = 40; 
+
+     if (newSize < minFontSize) newSize = minFontSize;
+     if (newSize > maxFontSize) newSize = maxFontSize;
+
+     body.style.fontSize = `${newSize}px`;
+
+     console.log(`Font size changed to: ${newSize}px`); // Debugging output
+     }
+
+     function toggleLetterSpacing() {
+         document.body.classList.toggle('extra-spacing');
+     }
+
+     function toggleLineHeight() {
+         document.body.classList.toggle('wide-lines');
+     }
+
+     function toggleDyslexiaFont() {
+         document.body.classList.toggle('dyslexia-font');
+     }
+
+     function toggleHighlightHeadings() {
+         document.body.classList.toggle('highlight-headings');
+     }
+
+     function toggleHighlightLinks() {
+         document.body.classList.toggle('highlight-links');
+     }
+
+     function toggleBoldText() {
+         document.body.classList.toggle('bold-text');
+     }
+
+     function enableBigCursor(load = false) {
+     let isBigCursorEnabled = parseInt(localStorage.getItem('isBigCursorEnabled'));
+     if(load)
+     {
+         isBigCursorEnabled = !isBigCursorEnabled;
+     }
+     if (!isBigCursorEnabled) {
+         document
+             .querySelectorAll("*")
+             .forEach((el) => {
+                 el.style.cursor = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 512 512'%3E%3Cpath d='M429.742 319.31L82.49 0l-.231 471.744 105.375-100.826 61.89 141.083 96.559-42.358-61.89-141.083 145.549-9.25zM306.563 454.222l-41.62 18.259-67.066-152.879-85.589 81.894.164-333.193 245.264 225.529-118.219 7.512 67.066 152.878z' xmlns='http://www.w3.org/2000/svg'/%3E%3C/svg%3E"), default`;;
+             });
+         localStorage.setItem('isBigCursorEnabled', 1);
+     } else {
+         document
+             .querySelectorAll("*")
+             .forEach((el) => {
+                 el.style.cursor = 'default';
+             });
+
+         localStorage.setItem('isBigCursorEnabled', 0);
+     }
+ }
+
+     function toggleContrast() {
+         document.body.classList.toggle('high-contrast');
+     }
+
+     function resetSettings() {
+         document.body.classList.remove(
+             'large-font', 'extra-spacing', 'wide-lines', 
+             'dyslexia-font', 'highlight-headings', 
+             'highlight-links', 'bold-text', 
+             'large-cursor', 'high-contrast'
+         );
+         document.body.style.color = '';
+         title.style.color = ''; 
+     }
+ </script>
+</html>
