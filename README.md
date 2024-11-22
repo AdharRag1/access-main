@@ -20,11 +20,8 @@ Highlight headings to improve navigation and readability.
 Adjust the line height for better spacing between lines of text.
 ### Contrast Adjustment: 
 Enhance the contrast between text and background for improved legibility.
-## Usage
-To use the Accessibility Widget, follow these steps:
 
-* Include the JavaScript code and CSS styles in your web page.
-* Create an HTML container element to hold the widget.
 
-## Preview
-![1](https://github.com/swethatheresa/Accessibility-Widget/assets/83918978/a8be9d0d-ae17-49fd-be72-72a74a00efeb)
+
+
+
